@@ -9,14 +9,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class ResourcePane {
-	Text resources = new Text();
+	static Text resources = new Text();
 	
 	public ResourcePane() {
 
 	}
 	
 	
-	public GridPane addResourcePane() {
+	public static GridPane addResourcePane() {
 		GridPane resourceGrid = new GridPane();
 		resourceGrid.setAlignment(Pos.CENTER);
 		resourceGrid.setHgap(10);
@@ -30,7 +30,7 @@ public class ResourcePane {
 		return resourceGrid;
 	}
 	
-	public void updateResources(int materials) {
+	public static void updateResources(int materials) {
 		resources.textProperty().bind(Bindings.createStringBinding(() -> ("Resources: " + materials + " iron")));
 	}
 }

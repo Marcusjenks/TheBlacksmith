@@ -2,21 +2,21 @@ package application;
 
 public class Resources {
 	
-	private int iron;
+	public static int iron = 0;
 
-	public Resources(int iron) {
-		this.iron = iron;
-	}
+//	public Resources(int iron) {
+//		this.iron = iron;
+//	}
 	
-	public int getIron() {
+	public static int getIron() {
 		return iron;
 	}
 	
-	public void gatherIron() {
+	public static void gatherIron() {
 		iron++;
 	}
 	
-	public void useIron() {
+	public static void useIron() {
 		iron--;
 	}
 	
