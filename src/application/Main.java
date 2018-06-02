@@ -28,7 +28,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	public Resources materials = new Resources(0);
+	Resources materials = new Resources(0);
+	ResourcePane resourcepane = new ResourcePane();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -37,21 +38,9 @@ public class Main extends Application {
 		BorderPane border = new BorderPane();
 		border.setLeft(addWeaponPane());
 		border.setRight(addGatherPane());
+		border.setBottom(resourcepane.addResourcePane());
+		resourcepane.updateResources(materials.getIron());
 
-		StackPane root = new StackPane();
-
-		GridPane resourceGrid = new GridPane();
-		resourceGrid.setAlignment(Pos.BOTTOM_CENTER);
-		resourceGrid.setHgap(10);
-		resourceGrid.setVgap(10);
-		resourceGrid.setPadding(new Insets(50, 50, 50, 50));
-		resourceGrid.setPickOnBounds(false);
-
-		Text scenetitle = new Text();
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 30));
-		resourceGrid.add(scenetitle, 0, 0, 2, 1);
-
-		root.getChildren().add(resourceGrid);
 
 		Scene scene = new Scene(border, 640, 480);
 		primaryStage.setScene(scene);
@@ -101,6 +90,7 @@ public class Main extends Application {
 				if (materials.getIron() > 0) {
 					actiontarget.setText("You crafted a sword!");
 					materials.useIron();
+					resourcepane.updateResources(materials.getIron());
 				} else if (materials.getIron() <= 0) {
 					actiontarget.setText("Not enough supplies!");
 				}
@@ -141,14 +131,11 @@ public class Main extends Application {
 				actiontarget.setFill(Color.BLACK);
 				actiontarget.setText("You gathered some iron!");
 				materials.gatherIron();
+				resourcepane.updateResources(materials.getIron());
 			}
 		});
 
 		return gatherGrid;
 	}
-
-	private void updateResources(Text scenetitle) {
-		scenetitle.textProperty()
-				.bind(Bindings.createStringBinding(() -> ("Resources: " + materials.getIron() + " iron")));
-	}
+	
 }
