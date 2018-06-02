@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	Resources materials = new Resources(0);
+	public Resources materials = new Resources(0);
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -50,42 +50,10 @@ public class Main extends Application {
 		Text scenetitle = new Text();
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 30));
 		resourceGrid.add(scenetitle, 0, 0, 2, 1);
-		scenetitle.textProperty()
-				.bind(Bindings.createStringBinding(() -> ("Resources : " + materials.getIron() + " iron")));
 
-		final Text actiontarget = new Text();
-		// weaponGrid.add(actiontarget, 1, 6);
-
-		// craftSword.setOnAction(new EventHandler<ActionEvent>() {
-		//
-		// @Override
-		// public void handle(ActionEvent e) {
-		// actiontarget.setFill(Color.BLACK);
-		// if(materials.getIron() > 0) {
-		// actiontarget.setText("You crafted a sword!");
-		// materials.useIron();;
-		// scenetitle.textProperty().bind(Bindings.createStringBinding(() -> ("Resources
-		// : " + materials.getIron() + " iron")));
-		// } else if (materials.getIron() <= 0){
-		// actiontarget.setText("Not enough supplies!");
-		// }
-		// }
-		// });
-
-		// gatherIron.setOnAction(new EventHandler<ActionEvent>() {
-		//
-		// @Override
-		// public void handle(ActionEvent e) {
-		// actiontarget.setFill(Color.BLACK);
-		// actiontarget.setText("You gathered some iron!");
-		// materials.gatherIron();
-		// scenetitle.textProperty().bind(Bindings.createStringBinding(() -> ("Resources
-		// : " + materials.getIron() + " iron")));
-		// }
-		// });
 		root.getChildren().add(resourceGrid);
 
-		Scene scene = new Scene(border);
+		Scene scene = new Scene(border, 640, 480);
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
@@ -122,6 +90,23 @@ public class Main extends Application {
 		cDagger.getChildren().add(craftDagger);
 		weaponGrid.add(cDagger, 1, 2);
 
+		final Text actiontarget = new Text();
+		weaponGrid.add(actiontarget, 0, 6);
+
+		craftSword.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent e) {
+				actiontarget.setFill(Color.BLACK);
+				if (materials.getIron() > 0) {
+					actiontarget.setText("You crafted a sword!");
+					materials.useIron();
+				} else if (materials.getIron() <= 0) {
+					actiontarget.setText("Not enough supplies!");
+				}
+			}
+		});
+
 		return weaponGrid;
 
 	}
@@ -146,6 +131,24 @@ public class Main extends Application {
 		gIron.getChildren().add(gatherIron);
 		gatherGrid.add(gIron, 1, 0);
 
+		final Text actiontarget = new Text();
+		gatherGrid.add(actiontarget, 0, 6);
+
+		gatherIron.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent e) {
+				actiontarget.setFill(Color.BLACK);
+				actiontarget.setText("You gathered some iron!");
+				materials.gatherIron();
+			}
+		});
+
 		return gatherGrid;
+	}
+
+	private void updateResources(Text scenetitle) {
+		scenetitle.textProperty()
+				.bind(Bindings.createStringBinding(() -> ("Resources: " + materials.getIron() + " iron")));
 	}
 }
