@@ -33,7 +33,7 @@ public class Main extends Application {
 		ResourcePane.updateResources(Resources.getIron(), Inventory.getSword(), Inventory.getDagger());
 
 
-		Scene scene = new Scene(border, 640, 480);
+		Scene scene = new Scene(border);
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
