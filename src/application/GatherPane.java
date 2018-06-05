@@ -53,7 +53,7 @@ public class GatherPane {
 				actiontarget.setFill(Color.BLACK);
 				actiontarget.setText("You gathered some iron!");
 				Resources.gatherIron();
-				ResourcePane.updateResources(Resources.getIron());
+				ResourcePane.updateResources(Resources.getIron(), Inventory.getSword(), Inventory.getDagger());
 			}
 		});
 		

@@ -30,7 +30,7 @@ public class Main extends Application {
 		border.setLeft(WeaponPane.addWeaponPane());
 		border.setRight(GatherPane.addGatherPane());
 		border.setBottom(ResourcePane.addResourcePane());
-		ResourcePane.updateResources(Resources.getIron());
+		ResourcePane.updateResources(Resources.getIron(), Inventory.getSword(), Inventory.getDagger());
 
 
 		Scene scene = new Scene(border, 640, 480);

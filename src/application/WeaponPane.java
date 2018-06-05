@@ -64,7 +64,8 @@ public class WeaponPane {
 					if (Resources.iron > 0) {
 						actiontarget.setText("You crafted a " + weapon.getText() + "!");
 						Resources.useIron();
-						ResourcePane.updateResources(Resources.getIron());
+						Inventory.addItem(weapon.getText());
+						ResourcePane.updateResources(Resources.getIron(), Inventory.getSword(), Inventory.getDagger());
 					} else if (Resources.iron <= 0) {
 						actiontarget.setText("Not enough supplies!");
 					}
