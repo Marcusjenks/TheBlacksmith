@@ -9,14 +9,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class ResourcePane {
-	Text resources = new Text();
-	
-	public ResourcePane() {
+	static Text resources = new Text();
+	static Text inventory = new Text();
 
-	}
-	
-	
-	public GridPane addResourcePane() {
+	public static GridPane addResourcePane() {
 		GridPane resourceGrid = new GridPane();
 		resourceGrid.setAlignment(Pos.CENTER);
 		resourceGrid.setHgap(10);
@@ -27,10 +23,14 @@ public class ResourcePane {
 		resources.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 30));
 		resourceGrid.add(resources, 0, 0, 2, 1);
 		
+		inventory.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 30));
+		resourceGrid.add(inventory, 0, 1, 3, 2);
+		
 		return resourceGrid;
 	}
 	
-	public void updateResources(int materials) {
+	public static void updateResources(int materials, int sword, int dagger) {
 		resources.textProperty().bind(Bindings.createStringBinding(() -> ("Resources: " + materials + " iron")));
+		inventory.textProperty().bind(Bindings.createStringBinding(() -> ("Swords: " + sword + " | Daggers: " + dagger)));
 	}
 }
